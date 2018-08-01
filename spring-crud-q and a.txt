@@ -103,3 +103,9 @@ Ans:- True
 
 18) For select operations we use "jdbcTemplate.query(sql,otherparams)". True or False ?
 Ans:-True.
+
+19) What is connection pooling?
+
+Ans:- Database connection pooling is a method used to keep database connections open.
+      so they can be reused by others .
+      Pooling keeps the connections active .
