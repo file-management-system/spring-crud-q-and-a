@@ -1,0 +1,105 @@
+1)Which class is provided by Spring provides for database operation?
+
+Ans:- JDBCTemplate class is provided by Spring for database operation.
+2) Which annotation is  used along with JdbcTemplate so that spring can inject JdbcTemplate?
+
+Ans:- @Autowire annotation is used along with JDBCTemplate so that spring can inject JDBCTemplate.
+
+3)The JdbcTemplate is declared as bean even though the programmer has not declared this class as bean. So is it mean that JdbcTemplate is auto-configured?
+Ans:- yes
+
+4)Spring can Inject JdbcTemplate into our class but what annotation we have to add at our class level. What is the category of that annotaion which we used at class level to make our class as bean?
+Ans:- @Autowire annotaion we have to add at our class level.
+      The category of that annotaion(@Repository) which we used at our class level to make our class as bean is Spring stereotype.
+
+5)What are the methods available as part of Spring JdbcTemplate class. 
+Ans:query(),update(),queryforObject are the methods available as part of spring JdbcTemplate class.
+
+6) Which annotation is reponsible to manage the transaction in spring.
+
+Ans:- @Transactional annotaion is reponsible to manage the transaction in spring.
+
+7)  Which interface of spring jdbc we have to implement in our custom class so that database row can be mapped to a java object?
+
+Ans:- RowMapper interface of spring jdbc we have to implement in our custom class so that  database row can be mapped to a java object.
+
+8) When column name of the table and field name of the entiry class are same then which type of RowMapper we have to use?
+
+Ans:- When column name of the table field name of the entiry class are same then BeanProperty type of RowMapper we have to use.
+
+9) Write the maven dependency for spring-boot-starter-jdbc.
+Ans:- The    dependency we  add for spring-boot-starter-jdbc is 
+ <dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-jdbc</artifactId>
+ </dependency> 
+10) Write the maven dependency for spring-boot-starter-data-jpa?
+  Ans:-
+  <dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-data-jpa</artifactId>
+   </dependency> 
+
+11)In which file we used to add DataSource and Connection Pooling information in spring boot.
+
+Ans:- In application.properties file we used to add DataSource and Connection Pooling information in spring boot.
+
+12) Write the mysql database configuration information.
+
+Ans:-spring.datasource.driver-class-name=com.mysql.jdbc.Driver
+     spring.datasource.url=jdbc:mysql://localhost:3306/concretepage
+     spring.datasource.username=root
+     spring.datasource.password=  
+
+ 13)Write the tomcat datasource configuration.
+ Ans:-spring.datasource.tomcat.max-wait=20000
+      spring.datasource.tomcat.max-active=50
+      spring.datasource.tomcat.max-idle=20
+       spring.datasource.tomcat.min-idle=15 
+	   
+14) In which layer we used to add JdbcTemplate as Autowired.
+  Options: Service or Repository.
+  
+  Ans:-In Repository layer we used to add JDBCTemplate as Autowired.
+  
+15) Write the code for custom row mapper to select productId and productPrice for the below class .
+class Product
+{
+ int productId;
+ String productName;
+ Double productPrice;
+}
+
+Ans:-public class ProductRowMapper implements RowMapper<Product> {
+   @Override
+   public Product mapRow(ResultSet row, int rowNum) throws SQLException {
+	Product product= new Product();
+	product.setProductId(row.getInt("productId"));
+	product.setProductPrice(row.getDouble("productPrice"));
+	
+	return product;
+   }
+}
+
+16) How to use Custom RowMapper with jdbcTemplate. Write the code.
+Ans:-
+public List<Product> getAllProducts() {
+   String sql = "SELECT productid, productname, productprice FROM products";
+   RowMapper<Product> rowMapper = new ProductRowMapper();
+   return this.jdbcTemplate.query(sql, rowMapper);
+}  
+
+17) How to use BeanProperty RowMapper with jdbcTemplate. Write the code.
+
+Ans:-public List<Product> getAllProducts() {
+   String sql = "SELECT productid, productname, productprice FROM products";
+   RowMapper<Product> rowMapper = new BeanPropertyRowMapper<Product>(Product.class);
+   return this.jdbcTemplate.query(sql, rowMapper);
+}  
+
+- For insert,update,delete (or the operations other than select) we use "jdbcTemplate.update(sql,other parameters)" ? True or False.
+Ans:- True
+
+
+18) For select operations we use "jdbcTemplate.query(sql,otherparams)". True or False ?
+Ans:-True.
